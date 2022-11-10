@@ -1,4 +1,4 @@
-import { motion, Transition } from "framer-motion";
+import { motion, Transition, Variants } from "framer-motion";
 import styled from "styled-components";
 import Toggle from "./Toggler";
 
@@ -54,11 +54,12 @@ const Boxes = styled(motion.div)`
 const Box = styled(motion.div)`
   height: 100px;
   width: 100px;
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 5px;
 `;
 
 const All = styled.section`
@@ -68,7 +69,12 @@ const All = styled.section`
   width: 100vw;
 `;
 
-const BoxVariants = {
+const StyledH2 = styled.h2`
+  font-size: 30px;
+  text-align: center;
+`;
+
+const BoxVariants: Variants = {
   hide: {
     opacity: 0
   },
@@ -83,10 +89,12 @@ const BoxVariants = {
 
 const ChildVariants = {
   hide: {
-    opacity: 0
+    opacity: 0,
+    y: -50
   },
   show: {
-    opacity: 1
+    opacity: 1,
+    y: 0
   }
 };
 
@@ -96,7 +104,7 @@ export default function App() {
       <section className="funds__Container-sc-f8adb1ab-0 ghpPeB">
         <All>
           <div>
-            <h2 className="ContentHeading-sc-69ab857c-0 bmlHEs">Total so far</h2>
+            <StyledH2 className="ContentHeading-sc-69ab857c-0 bmlHEs">Total so far</StyledH2>
             <p className="ContentSubHeading-sc-bb5ff6a3-0 fWkjVL">
               This is the total amount of money raised so far.
             </p>
@@ -123,8 +131,8 @@ export default function App() {
                   stroke-dasharray="1px 1px"
                   data-projection-id="34"
                   initial={{ pathLength: 0, stroke: "#EC4699" }}
-                  animate={{ pathLength: 1, stroke: "#ff0000" }}
-                  transition={{ duration: 3, type: "spring", damping: 10 }}
+                  animate={{ pathLength: 1, stroke: "#0000ff" }}
+                  transition={{ duration: 3 }}
                 ></motion.path>
                 <motion.path
                   role="graphics-symbol"
@@ -139,8 +147,8 @@ export default function App() {
                   stroke-dasharray="1px 1px"
                   data-projection-id="36"
                   initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, delay: 1 }}
+                  animate={{ pathLength: 1, stroke: "#ff0000" }}
+                  transition={{ duration: 3, delay: 1 }}
                 ></motion.path>
               </svg>
               <ChartText>
