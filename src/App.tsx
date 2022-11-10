@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const StyledHome = styled(motion.div)`
@@ -20,7 +20,7 @@ const StyledHome = styled(motion.div)`
   }
 `;
 
-const Circle = styled.div`
+const Circle = styled(motion.div)`
   height: 300px;
   width: 300px;
   border-radius: 50%;
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <StyledHome>
-      {visible && <Circle />}
+      <AnimatePresence>{visible && <Circle exit={{ opacity: 0 }} />}</AnimatePresence>
       {<button onClick={() => setVisible(!visible)}>Invisible</button>}
     </StyledHome>
   );
