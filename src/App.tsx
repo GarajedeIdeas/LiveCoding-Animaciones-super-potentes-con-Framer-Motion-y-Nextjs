@@ -8,21 +8,20 @@ const StyledHome = styled(motion.div)`
   height: 100vh;
   flex-wrap: wrap;
   overflow: hidden;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Box = styled(motion.div)`
   height: 500px;
   width: 500px;
-  border: 1px solid #8b1bbc;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
-  top: 100px;
-  left: 100px;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 
   img {
     height: 300px;
@@ -33,6 +32,8 @@ const Controls = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 10000;
 `;
 type Point = {
   x: number;
