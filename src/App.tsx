@@ -1,94 +1,65 @@
+import { motion } from "framer-motion";
+import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform } from "framer-motion";
 
 const StyledHome = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
-
   display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   flex-wrap: wrap;
   overflow: hidden;
+  flex-direction: column;
 `;
 
-const StyledHomeC = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
+const Box = styled(motion.div)`
+  height: 500px;
+  width: 500px;
+  border: 1px solid black;
+`;
 
+const Controls = styled.div`
   display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
-  width: 100%;
-  flex-wrap: wrap;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 `;
-
-function randomFloat(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-function shuffle(array: any[]) {
-  return array.sort(() => Math.random() - 0.5);
-}
-
-const spring = {
-  // type: "spring",
-  damping: 10,
-  stiffness: 100,
-  delay: 2,
-  duration: 2
-};
-const boxVariant = {
-  hidden: {
-    x: "-100vw" //move out of the site
-  },
-  visible: {
-    x: 0, // bring it back to nrmal
-    transition: {
-      delayChildren: 1,
-      staggerChildren: 0.2 //apply stagger on the parent tag
-    }
-  }
-};
-
-const listVariant = {
-  hidden: {
-    opacity: 0,
-    height: 20,
-    width: 20,
-    background: "red"
-  },
-  visible: {
-    x: 0, // bring it back to nrmal
-    opacity: 1,
-    height: 100,
-    width: 20,
-    background: "red"
-  }
+type Point = {
+  x: number;
+  y: number;
 };
 
 export default function App() {
-  const XX = Array(20)
-    .fill(0)
-    .map((x, i) => (
-      <motion.div variants={listVariant} key={i}>
-        x
-      </motion.div>
-    ));
+  const [coords, setCoords] = useState<Point>({ x: 0, y: 0 });
+  const { x, y } = coords;
 
   return (
     <StyledHome>
-      {XX.length > 0 && (
-        <StyledHomeC variants={boxVariant} initial="hidden" animate="visible">
-          {XX}
-        </StyledHomeC>
-      )}
+      <Box
+        initial={{ x, y }}
+        animate={{ x, y, rotate: x > 100 ? x : 0 }}
+        transition={{ type: "spring" }}
+      />
+
+      <Controls>
+        <input
+          type="range"
+          min="0"
+          max="200"
+          value={coords.x}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setCoords({ ...coords, x: +e.target.value })
+          }
+        />
+
+        <input
+          type="range"
+          min="0"
+          max="200"
+          value={coords.y}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setCoords({ ...coords, y: +e.target.value })
+          }
+        />
+      </Controls>
     </StyledHome>
   );
 }
