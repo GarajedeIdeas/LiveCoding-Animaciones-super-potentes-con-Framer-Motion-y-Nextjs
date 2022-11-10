@@ -1,12 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import Toggle from "./Toggler";
 
 const StyledHome = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
-
   display: flex;
   max-width: 100vw;
   max-height: 100vh;
@@ -18,22 +14,21 @@ const StyledHome = styled(motion.div)`
   button {
     margin-top: 100px;
   }
-`;
 
-const Circle = styled(motion.div)`
-  height: 300px;
-  width: 300px;
-  border-radius: 50%;
-  background: white;
+  ${Toggle.Element} {
+    margin-bottom: 10px;
+  }
 `;
 
 export default function App() {
-  const [visible, setVisible] = useState(true);
-
   return (
     <StyledHome>
-      <AnimatePresence>{visible && <Circle exit={{ opacity: 0 }} />}</AnimatePresence>
-      {<button onClick={() => setVisible(!visible)}>Invisible</button>}
+      <Toggle />
+      <Toggle />
+      <Toggle />
+      <Toggle />
+      <Toggle />
+      <Toggle />
     </StyledHome>
   );
 }
