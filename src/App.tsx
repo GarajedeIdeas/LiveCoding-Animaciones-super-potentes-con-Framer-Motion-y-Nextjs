@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, Transition } from "framer-motion";
 import styled from "styled-components";
 import Toggle from "./Toggler";
 
@@ -43,16 +43,63 @@ const ChartText = styled.div`
   }
 `;
 
+const Boxes = styled(motion.div)`
+  margin-left: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 30px;
+`;
+
+const Box = styled(motion.div)`
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 0 5px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const All = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+`;
+
+const BoxVariants = {
+  hide: {
+    opacity: 0
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 1
+    }
+  }
+};
+
+const ChildVariants = {
+  hide: {
+    opacity: 0
+  },
+  show: {
+    opacity: 1
+  }
+};
+
 export default function App() {
   return (
     <StyledHome>
       <section className="funds__Container-sc-f8adb1ab-0 ghpPeB">
-        <h2 className="ContentHeading-sc-69ab857c-0 bmlHEs">Total so far</h2>
-        <p className="ContentSubHeading-sc-bb5ff6a3-0 fWkjVL">
-          This is the total amount of money raised so far.
-        </p>
-        <section>
+        <All>
           <div>
+            <h2 className="ContentHeading-sc-69ab857c-0 bmlHEs">Total so far</h2>
+            <p className="ContentSubHeading-sc-bb5ff6a3-0 fWkjVL">
+              This is the total amount of money raised so far.
+            </p>
             <Chart>
               <svg width="294" height="294" xmlns="http://www.w3.org/2000/svg">
                 <circle
@@ -63,7 +110,7 @@ export default function App() {
                   fill="none"
                   stroke="#E9EDF9"
                 ></circle>
-                <path
+                <motion.path
                   role="graphics-symbol"
                   aria-label="$19,694,605"
                   d="M 146.99805072926213 287.99999998652606 A 141 141 0 1 0 147 6"
@@ -75,8 +122,11 @@ export default function App() {
                   stroke-dashoffset="0px"
                   stroke-dasharray="1px 1px"
                   data-projection-id="34"
-                ></path>
-                <path
+                  initial={{ pathLength: 0, stroke: "#EC4699" }}
+                  animate={{ pathLength: 1, stroke: "#ff0000" }}
+                  transition={{ duration: 3, type: "spring", damping: 10 }}
+                ></motion.path>
+                <motion.path
                   role="graphics-symbol"
                   aria-label="$18,696,854"
                   d="M 135.5025754486223 6.469543412520807 A 141 141 0 0 0 135.50063267024018 287.53029762658036"
@@ -88,7 +138,10 @@ export default function App() {
                   stroke-dashoffset="0px"
                   stroke-dasharray="1px 1px"
                   data-projection-id="36"
-                ></path>
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1, delay: 1 }}
+                ></motion.path>
               </svg>
               <ChartText>
                 <h2>Total Funds Requested</h2>
@@ -96,7 +149,37 @@ export default function App() {
               </ChartText>
             </Chart>
           </div>
-        </section>
+          <Boxes variants={BoxVariants} initial="hide" animate="show">
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+            <Box variants={ChildVariants}>
+              <h1>Data</h1>
+              <p>100%</p>
+            </Box>
+          </Boxes>
+        </All>
       </section>
     </StyledHome>
   );
