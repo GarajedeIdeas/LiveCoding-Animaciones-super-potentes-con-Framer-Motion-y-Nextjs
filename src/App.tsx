@@ -21,14 +21,5 @@ const StyledHome = styled(motion.div)`
 `;
 
 export default function App() {
-  return (
-    <StyledHome>
-      <Toggle />
-      <Toggle />
-      <Toggle />
-      <Toggle />
-      <Toggle />
-      <Toggle />
-    </StyledHome>
-  );
+  return <StyledHome></StyledHome>;
 }
