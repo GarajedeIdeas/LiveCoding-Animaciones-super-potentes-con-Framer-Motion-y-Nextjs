@@ -1,18 +1,6 @@
 import styled from "styled-components";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-
-const StyledHome = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
-
-  display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
-  width: 100%;
-  flex-wrap: wrap;
-  overflow: hidden;
-`;
+import { useState } from "react";
 
 const StyledHomeC = styled(motion.div)`
   /* [data-styled-component-toggle] {
@@ -73,22 +61,73 @@ const listVariant = {
   }
 };
 
-export default function App() {
-  const XX = Array(20)
-    .fill(0)
-    .map((x, i) => (
-      <motion.div variants={listVariant} key={i}>
-        x
-      </motion.div>
-    ));
+const ColorBox = styled(motion.div)`
+  height: 400px;
+  width: 200px;
+  border-radius: 20px;
+  background: red;
+`;
+
+const StyledHome = styled(motion.div)`
+  /* [data-styled-component-toggle] {
+    margin-bottom: 10px;
+  } */
+
+  display: flex;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: 100vh;
+  flex-wrap: wrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${ColorBox} {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+const StyledC = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const C: React.FC = () => {
+  const [colorValue, setColorValue] = useState(0);
 
   return (
+    <StyledC>
+      <ColorBox
+        animate={{ background: `rgb(${colorValue}, 0, 0)` }}
+        transition={{ type: "spring" }}
+      />
+
+      <input
+        type="range"
+        min="0"
+        max="255"
+        value={colorValue}
+        onChange={(e) => setColorValue(+e.target.value)}
+      />
+      {colorValue}
+    </StyledC>
+  );
+};
+
+export default function App() {
+  return (
     <StyledHome>
-      {XX.length > 0 && (
-        <StyledHomeC variants={boxVariant} initial="hidden" animate="visible">
-          {XX}
-        </StyledHomeC>
-      )}
+      <C />
+      <C />
+      <C />
     </StyledHome>
   );
 }
