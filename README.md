@@ -20,6 +20,6 @@ https://www.behance.net/danivicario
 
 ## [Visita el Workshop](https://www.youtube.com/watch?v=M7mBLuQ1_34&t=424s&ab_channel=GarajedeIdeas)
 
-Enlace a la presentación:
+Enlace a la presentación: https://docs.google.com/presentation/d/1-Y4icAzIRL7aUKZ5dewICcrCSTDvNQCQPz974GxoBHk/edit#slide=id.p
 
 ¡Muchas gracias!
