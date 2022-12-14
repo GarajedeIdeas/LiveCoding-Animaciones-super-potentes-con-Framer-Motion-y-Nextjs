@@ -31,6 +31,9 @@ const DrodownHeader = styled(motion.div)`
   border-radius: 10px;
   box-shadow: 0 0 5px black;
   margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const DrodownOptions = styled(motion.ul)`
@@ -45,6 +48,14 @@ const DrodownOptions = styled(motion.ul)`
       margin-bottom: 0;
     }
   }
+`;
+
+const TickWrapper = styled(motion.div)`
+  transform-origin: center center;
+`;
+
+const Tick = styled(motion.svg)`
+  height: 8px;
 `;
 
 const DrodownOption = styled(motion.li)``;
@@ -80,7 +91,29 @@ export default function App() {
   return (
     <Container animate={isVisible ? "visible" : "hidden"}>
       <DropDown>
-        <DrodownHeader onClick={() => setIsVisible(!isVisible)}>Click me</DrodownHeader>
+        <DrodownHeader onClick={() => setIsVisible(!isVisible)}>
+          <span>Click me</span>
+          <TickWrapper
+            animate={
+              isVisible
+                ? {
+                    rotate: 180,
+                    transition: {
+                      delay: 0.25
+                    }
+                  }
+                : {
+                    rotate: 0
+                  }
+            }
+          >
+            <Tick viewBox="0 0 614 309.07" height="8">
+              <g>
+                <polygon points="1.15,0.5 606.85,0.5 304,303.35 	" />
+              </g>
+            </Tick>
+          </TickWrapper>
+        </DrodownHeader>
 
         <AnimatePresence>
           <DrodownOptions variants={drodownOptionsVariants} initial={false}>
