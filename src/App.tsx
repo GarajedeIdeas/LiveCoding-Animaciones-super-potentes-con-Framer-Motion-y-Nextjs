@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import styled from "styled-components";
 import "./reset.css";
@@ -18,111 +18,72 @@ const Container = styled(motion.div)`
     -webkit-font-smoothing: antialiased;
   }
 `;
-const DropDown = styled(motion.div)`
-  position: relative;
-  width: 200px;
+
+const Cal = styled(motion.div)`
+  height: 500px;
+  background: white;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px;
 `;
 
-const DrodownHeader = styled(motion.div)`
-  background: white;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 0 5px black;
-  margin-bottom: 5px;
+const Day = styled(motion.span)`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  padding: 10px 30px;
 `;
-
-const DrodownOptions = styled(motion.ul)`
-  background: white;
-  padding: 10px;
-  width: 100%;
-
-  li {
-    margin-bottom: 10px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-`;
-
-const TickWrapper = styled(motion.div)`
-  transform-origin: center center;
-`;
-
-const Tick = styled(motion.svg)`
-  height: 8px;
-`;
-
-const DrodownOption = styled(motion.li)``;
-
-const drodownOptionsVariants: Variants = {
-  hidden: {
-    opacity: 0
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.3,
-      duration: 1,
-      staggerChildren: 0.5
-    }
-  }
-};
-
-const drodownOptionsVariant: Variants = {
-  hidden: {
-    x: 0,
-    opacity: 0
-  },
-  visible: {
-    x: 10,
-    opacity: 1
-  }
-};
 
 export default function App() {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedDay, setSelectedDay] = useState<number | undefined>(undefined);
 
   return (
     <Container animate={isVisible ? "visible" : "hidden"}>
-      <DropDown>
-        <DrodownHeader onClick={() => setIsVisible(!isVisible)}>
-          <span>Click me</span>
-          <TickWrapper
-            animate={
-              isVisible
-                ? {
-                    rotate: 180,
-                    transition: {
-                      delay: 0.25
-                    }
-                  }
-                : {
-                    rotate: 0
-                  }
+      <button onClick={() => setIsVisible(true)}>Click me!</button>
+      <Cal
+        initial={{ scale: 0, rotate: 180 }}
+        animate={
+          isVisible && {
+            scale: 1,
+            rotate: 360,
+            transition: {
+              duration: 1
             }
-          >
-            <Tick viewBox="0 0 614 309.07" height="8">
-              <g>
-                <polygon points="1.15,0.5 606.85,0.5 304,303.35 	" />
-              </g>
-            </Tick>
-          </TickWrapper>
-        </DrodownHeader>
-
-        <AnimatePresence>
-          <DrodownOptions variants={drodownOptionsVariants} initial={false}>
-            {["Option 1", "Option 2", "Option 3"].map((option) => (
-              <DrodownOption variants={drodownOptionsVariant}>{option}</DrodownOption>
-            ))}
-          </DrodownOptions>
-        </AnimatePresence>
-      </DropDown>
+          }
+        }
+      >
+        {Array(31)
+          .fill(0)
+          .map((x, index) => {
+            return (
+              <Day
+                variants={{
+                  initial: {
+                    background: "#ff000000",
+                    borderRadius: "50%",
+                    scale: 0.4
+                  },
+                  selected: {
+                    background: "#ff0000ff",
+                    transition: {
+                      type: "spring"
+                    }
+                  },
+                  unselected: {
+                    background: "#fff"
+                  }
+                }}
+                onClick={() => setSelectedDay(index)}
+                key={index}
+                animate={selectedDay === index ? "selected" : "unselected"}
+                initial={selectedDay === index ? "initial" : "unselected"}
+              >
+                {index + 1}
+              </Day>
+            );
+          })}
+      </Cal>
     </Container>
   );
 }
