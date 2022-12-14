@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./reset.css";
 
 const Container = styled(motion.div)`
+  background: linear-gradient(180deg, #d0e, #91f);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -23,7 +24,7 @@ const DropDown = styled(motion.div)`
 `;
 
 const DrodownHeader = styled(motion.div)`
-  background: silver;
+  background: white;
   padding: 10px;
   cursor: pointer;
   width: 100%;
@@ -33,7 +34,7 @@ const DrodownHeader = styled(motion.div)`
 `;
 
 const DrodownOptions = styled(motion.ul)`
-  background: silver;
+  background: white;
   padding: 10px;
   width: 100%;
 
@@ -69,8 +70,7 @@ const drodownOptionsVariant: Variants = {
   },
   visible: {
     x: 10,
-    opacity: 1,
-    color: "green"
+    opacity: 1
   }
 };
 
