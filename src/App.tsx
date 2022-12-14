@@ -1,94 +1,95 @@
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { useState } from "react";
 import styled from "styled-components";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import "./reset.css";
 
-const StyledHome = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
-
+const Container = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
-  width: 100%;
-  flex-wrap: wrap;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+
+  * {
+    font-family: sofia-pro, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+  }
+`;
+const DropDown = styled(motion.div)`
+  position: relative;
+  width: 200px;
 `;
 
-const StyledHomeC = styled(motion.div)`
-  /* [data-styled-component-toggle] {
-    margin-bottom: 10px;
-  } */
-
-  display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
+const DrodownHeader = styled(motion.div)`
+  background: silver;
+  padding: 10px;
+  cursor: pointer;
   width: 100%;
-  flex-wrap: wrap;
-  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 5px black;
+  margin-bottom: 5px;
 `;
 
-function randomFloat(min: number, max: number) {
-  return Math.random() * (max - min) + min;
-}
-function randomInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-function shuffle(array: any[]) {
-  return array.sort(() => Math.random() - 0.5);
-}
+const DrodownOptions = styled(motion.ul)`
+  background: silver;
+  padding: 10px;
+  width: 100%;
 
-const spring = {
-  // type: "spring",
-  damping: 10,
-  stiffness: 100,
-  delay: 2,
-  duration: 2
-};
-const boxVariant = {
+  li {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
+
+const DrodownOption = styled(motion.li)``;
+
+const drodownOptionsVariants: Variants = {
   hidden: {
-    x: "-100vw" //move out of the site
+    opacity: 0
   },
   visible: {
-    x: 0, // bring it back to nrmal
+    opacity: 1,
     transition: {
-      delayChildren: 1,
-      staggerChildren: 0.2 //apply stagger on the parent tag
+      delayChildren: 0.3,
+      duration: 1,
+      staggerChildren: 0.5
     }
   }
 };
 
-const listVariant = {
+const drodownOptionsVariant: Variants = {
   hidden: {
-    opacity: 0,
-    height: 20,
-    width: 20,
-    background: "red"
+    x: 0,
+    opacity: 0
   },
   visible: {
-    x: 0, // bring it back to nrmal
+    x: 10,
     opacity: 1,
-    height: 100,
-    width: 20,
-    background: "red"
+    color: "green"
   }
 };
 
 export default function App() {
-  const XX = Array(20)
-    .fill(0)
-    .map((x, i) => (
-      <motion.div variants={listVariant} key={i}>
-        x
-      </motion.div>
-    ));
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <StyledHome>
-      {XX.length > 0 && (
-        <StyledHomeC variants={boxVariant} initial="hidden" animate="visible">
-          {XX}
-        </StyledHomeC>
-      )}
-    </StyledHome>
+    <Container animate={isVisible ? "visible" : "hidden"}>
+      <DropDown>
+        <DrodownHeader onClick={() => setIsVisible(!isVisible)}>Click me</DrodownHeader>
+
+        <AnimatePresence>
+          <DrodownOptions variants={drodownOptionsVariants} initial={false}>
+            {["Option 1", "Option 2", "Option 3"].map((option) => (
+              <DrodownOption variants={drodownOptionsVariant}>{option}</DrodownOption>
+            ))}
+          </DrodownOptions>
+        </AnimatePresence>
+      </DropDown>
+    </Container>
   );
 }
