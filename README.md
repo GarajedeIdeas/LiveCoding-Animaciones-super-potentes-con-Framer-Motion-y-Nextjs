@@ -1,4 +1,4 @@
-# Animaciones super potentes con Framer Motion y Nextjs
+# Animaciones super potentes con Framer Motion
 
 ## Por Dani Vicario
 
