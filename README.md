@@ -18,10 +18,11 @@ https://www.behance.net/danivicario
 
 ---
 
-## [Taller parte I](https://youtu.be/M7mBLuQ1_34)
-Enlace a la presentación Taller I: https://docs.google.com/presentation/d/1-Y4icAzIRL7aUKZ5dewICcrCSTDvNQCQPz974GxoBHk/edit#slide=id.p
+## [Grabación Taller "Framer Motion y Nextjs parte I"](https://youtu.be/M7mBLuQ1_34)
+Enlace a la presentación Taller I: 
+https://docs.google.com/presentation/d/1-Y4icAzIRL7aUKZ5dewICcrCSTDvNQCQPz974GxoBHk/edit#slide=id.p
 
-## [Taller parte II](https://youtu.be/xS-nyimWKRM)
+## [Grabación Taller "Framer Motion parte II"](https://youtu.be/xS-nyimWKRM)
 
 Enlace a la presentación Taller II: https://docs.google.com/presentation/d/1_K1nah3OKicb2dl73Homb6wAp2AKCgyoki1cVe1zch0/edit#slide=id.p
 
